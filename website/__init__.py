@@ -3,21 +3,20 @@ from os import path
 #from flask_login import LoginManager
 #from flask_sqlalchemy import SQLAlchemy
 
-'''
+
 db = SQLAlchemy(session_options={"autoflush": False})
-DB_NAME = "database.db"
-'''
+
 
 def create_app():
     app = Flask(__name__)
-    '''
+    
     app.config['SECRET_KEY'] = 'keyissecret'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://re-user-db-connect:B0nehe@d1@turing-variety-344019:us-west4:re-db?driver=ODBC+Driver+17+for+SQL+Server'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
-    create_database(app)
+    #create_database(app)
 
-    '''
+    
     from .views import views
     app.register_blueprint(views, url_prefix='/')
     #from .auth import auth
