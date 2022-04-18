@@ -1,0 +1,152 @@
+{% extends "base.html" %} 
+
+{% block content %} 
+
+{% if property %}
+<div class="card mb-3">
+    <div class="card-header">
+      <div class="row">
+        <div class="col">
+          <h5 class="mb-2">{{ property.name }}</h5>
+        </div>
+        <div class="col-auto d-none d-sm-block">
+          <h6 class="text-uppercase text-600">Property<span class="fas fa-building ms-2"></span></h6>
+        </div>
+      </div>
+    </div>
+    <div class="card-body border-top">
+      <div class="d-flex"><span class="fas fa-building text-success me-2" data-fa-transform="down-5"></span>
+        <div class="flex-1">
+          <p class="fs--1 mb-0 text-600">Property owned since</p>
+          <p class="fs--1 mb-0 text-600">Jan 12, 2022</p>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="card mb-3">
+<div class="card-header">
+    <div class="row align-items-center">
+    <div class="col">
+        <h5 class="mb-0">Property Details</h5>
+    </div>
+    <div class="col-auto"><a class="btn btn-falcon-default btn-sm" href="/edit_property/{{ property.id }}"><span class="fas fa-pencil-alt fs--2 me-1"></span>Update details</a></div>
+    </div>
+</div>
+<div class="card-body bg-light border-top">
+    <div class="row">
+    <div class="col-lg col-xxl-5">
+        <div class="row">
+        <div class="col-5 col-sm-4">
+            <p class="fw-semi-bold mb-1">Name</p>
+        </div>
+        <div class="col">{{ property.name }}</div>
+        </div>
+        <div class="row">
+        <div class="col-5 col-sm-4">
+            <p class="fw-semi-bold mb-1">Bedrooms</p>
+        </div>
+        <div class="col">{% if property.bedrooms %}{{ property.bedrooms }}{% endif %}</div>
+        </div>
+        <div class="row">
+        <div class="col-5 col-sm-4">
+            <p class="fw-semi-bold mb-1">Bathrooms</p>
+        </div>
+        <div class="col">{% if property.bathrooms %}{{ property.bathrooms }}{% endif %}</div>
+        </div>
+        <div class="row">
+        <div class="col-5 col-sm-4">
+            <p class="fw-semi-bold mb-1">Property Type</p>
+        </div>
+        <div class="col">{% if property.type %}{{ property.type }}{% endif %}
+        </div>
+        </div>
+    </div>
+    <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
+        <div class="row">
+        <div class="col-5 col-sm-4">
+            <p class="fw-semi-bold mb-1">Address</p>
+        </div>
+        <div class="col">
+            <p class="mb-1">{% if property.address %}{{ property.address }}{% endif %}<br />{% if property.city %}{{ property.city }},{% endif %} {% if property.state %}{{ property.state }}{% endif %} {% if property.zip_code %}{{ property.zip_code }}{% endif %}</p>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-5 col-sm-4">
+            <p class="fw-semi-bold mb-1"></p>
+        </div>
+        <div class="col"></div>
+        </div>
+        <div class="row">
+        <div class="col-5 col-sm-4">
+            <p class="fw-semi-bold mb-0">Monthly Rent</p>
+        </div>
+        <div class="col">
+            <p class="fw-semi-bold mb-0">{% if property.rent %}$ {{ property.rent }}{% endif %}</p>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-5 col-sm-4">
+            <p class="fw-semi-bold mb-1">Units</p>
+        </div>
+        <div class="col">{% if property.units %}{{ property.units }}{% endif %}</div>
+        </div>
+    </div>
+    </div>
+</div>
+<div class="card-footer border-top text-end"></div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h5 class="mb-0">Units</h5>
+            </div>
+            <div class="col-auto"><a class="btn btn-falcon-default btn-sm" href="/create_unit/{{property.id}}"><span class="fas fa-plus fs--2 me-1"></span>Create Unit</a></div>
+        </div>
+        
+    </div>
+    {% for unit in units %}
+    <div class="card-body border-top p-0">
+        <div class="row g-0 align-items-center border-bottom py-2 px-3">
+            <div class="col-md-auto pe-3"><span class="badge badge-soft-success rounded-pill">Good</span></div>
+            <div class="col-md mt-1 mt-md-0">{{ unit.name }}</div>
+            <div class="col-md-auto">
+                <p class="mb-0"></p>
+            </div>
+        </div>
+    </div>
+    {% endfor %} 
+    <div class="card-footer bg-light p-0"><a class="btn btn-link d-block w-100" href="#!">View more units<span class="fas fa-chevron-right fs--2 ms-1"></span></a></div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h5 class="mb-0">Active Tenants</h5>
+            </div>
+            <div class="col-auto"><a class="btn btn-falcon-default btn-sm" href="/create_tenant"><span class="fas fa-plus fs--2 me-1"></span>Create Tenant</a></div>
+        </div>
+        
+    </div>
+    {% for tenant in tenants %}
+    <div class="card-body border-top p-0">
+        <div class="row g-0 align-items-center border-bottom py-2 px-3">
+            <div class="col-md-auto pe-3"><span class="badge badge-soft-success rounded-pill">Good</span></div>
+            <div class="col-md mt-1 mt-md-0"></div>
+            <div class="col-md-auto">
+                <p class="mb-0">Lease Expires: 2019/02/23</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %} 
+    <div class="card-footer bg-light p-0"><a class="btn btn-link d-block w-100" href="#!">View past tenants<span class="fas fa-chevron-right fs--2 ms-1"></span></a></div>
+</div>
+{% else %} 
+<div class="card mb-3">
+    <div class="card-header">
+        <h5 class="mb-4">No property found!</h5><a class="btn btn-falcon-default btn-sm" href="/new_property"><span class="fas fa-plus fs--2 me-1"></span>Create Property</a>
+    </div>
+</div>
+{% endif %} 
+
+{% endblock %}
