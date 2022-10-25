@@ -3,10 +3,8 @@ from os import path
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
-
 db = SQLAlchemy(session_options={"autoflush": False})
 DB_NAME = 'database.db'
-
 
 def create_app():
     app = Flask(__name__)
@@ -17,13 +15,35 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 
-    from .views import views
-    from .auth import auth
+    with app.app_context():
+        from website.main.views import main
+        app.register_blueprint(main, url_prefix='/')
+        
+    from website.property.views import property
+    app.register_blueprint(property, url_prefix='/property')
 
-    app.register_blueprint(views, url_prefix='/')
+    from website.auth.views import auth
     app.register_blueprint(auth, url_prefix='/')
 
-    from .models import User
+    from website.unit.views import unit
+    app.register_blueprint(unit, url_prefix='/unit')
+
+    from website.profile.views import profile
+    app.register_blueprint(profile, url_prefix='/profile')
+
+    from website.tenant.views import tenant
+    app.register_blueprint(tenant, url_prefix='/tenant')
+
+    from website.lease.views import lease
+    app.register_blueprint(lease, url_prefix='/lease')
+
+    from website.portfolio.views import portfolio
+    app.register_blueprint(portfolio, url_prefix='/portfolio')
+
+    from website.errors import page_not_found
+    app.register_error_handler(404, page_not_found)
+
+    from website.models import User
     
     create_database(app)
     
@@ -35,9 +55,7 @@ def create_app():
     def load_user(id):
         return User.query.get(int(id))
     
-
     return app
-
 
 def create_database(app):
     if not path.exists('website/' + DB_NAME):

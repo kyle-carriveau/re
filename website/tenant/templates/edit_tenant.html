@@ -7,7 +7,7 @@
         <div class="card-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h5 class="mb-0">Create Tenant</h5>
+                    <h5 class="mb-0">Edit Tenant</h5>
                 </div>
             <div class="col-auto"></div>
             </div>
@@ -18,14 +18,14 @@
                     <div class="row">
                         <label class="col-5 col-sm-4 col-form-label" for="first_name">First Name</label>
                         <div class="col">
-                            <input class="form-control" type="text" name="first_name" id="first_name"/>
+                            <input class="form-control" type="text" name="first_name" id="first_name" value="{{ tenant.first_name }}"/>
                         </div>
                     </div>
                     <br />
                     <div class="row">
                         <label class="col-5 col-sm-4 col-form-label" for="last_name">Last Name</label>
                         <div class="col">
-                            <input class="form-control" type="text" name="last_name" id="last_name"/>
+                            <input class="form-control" type="text" name="last_name" id="last_name" value="{{ tenant.last_name }}"/>
                         </div>
                     </div>
                     <br />
@@ -40,18 +40,6 @@
                         <label class="col-5 col-sm-4 col-form-label" for="phone">Phone</label>
                         <div class="col">
                             <input class="form-control" type="number" min="0" name="phone" id="phone"/>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <label class="col-5 col-sm-4 col-form-label" for="property">Property</label>
-                        <div class="col">
-                            <select class="form-select" name="property" aria-label="Select Property" required>
-                                <option value=""></option>
-                                {% for property in properties %}
-                                <option value="{{ property.id }}">{{ property.name }}</option>
-                                {% endfor %}
-                            </select>
                         </div>
                     </div>
                 </div>

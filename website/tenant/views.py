@@ -45,3 +45,8 @@ def create():
 @login_required
 def home(id):
     return render_template("/tenant.html",tenant=get_tenant(id), user=current_user)
+
+@tenant.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
+    tenant = Tenant.query.filter_by(id=id, landlord=current_user.id)
+    return render_template("edit_tenant.html",tenant=tenant, user=current_user, states=get_states())

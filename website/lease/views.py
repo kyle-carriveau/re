@@ -31,6 +31,6 @@ def create(id):
         new_lease = Lease(tenant_id=tenant, unit_id=unit, start=datetime.strptime(start, '%Y-%m-%d'), end=datetime.strptime(end, '%Y-%m-%d'), rent=rent)
         db.session.add(new_lease)
         db.session.commit()
-        return redirect(url_for('property.property', user=current_user, id=id))
+        return redirect(url_for('property.home', user=current_user, id=id))
         
-    return render_template("lease/create.html", user=current_user, tenants=get_tenants(), units=get_units(id), properties=get_properties())
+    return render_template("create_lease.html", user=current_user, tenants=get_tenants(), units=get_units(id), properties=get_properties())

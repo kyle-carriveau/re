@@ -18,9 +18,10 @@ def login():
                 login_user(user, remember=True)
                 return redirect(url_for('profile.home'))
             else:
-                flash('Incorrect password, try again.', category='error')
+                flash('Incorrect password, try again.', category='warning')
+                return redirect(url_for('auth.login'))
         else:
-            flash('Email does not exist in database', category='error')
+            flash('Email does not exist in database', category='warning')
     return render_template("login.html", user=current_user)
 
 @auth.route('/logout')
@@ -51,3 +52,7 @@ def register():
             return redirect(url_for('profile.home'))
 
     return render_template("register.html", user=current_user)
+
+@auth.route('/forgot', methods=['GET', 'POST'])
+def forgot():
+    return render_template('forgot-password.html', user=current_user)

@@ -21,7 +21,7 @@ def create(id):
         db.session.commit()
         return redirect(url_for('property.home', id=id))
         
-    return render_template("create.html", user=current_user)
+    return render_template("create_unit.html", user=current_user)
 
 @unit.route('/<int:id>')
 @login_required

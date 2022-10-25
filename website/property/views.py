@@ -7,6 +7,11 @@ from website.views import get_properties, get_portfolios, get_states, get_units
 
 property = Blueprint('property', __name__, template_folder='templates')
 
+@property.route('/finances/<int:id>', methods=['GET', 'POST'])
+@login_required
+def finances(id):
+    return render_template("finances.html", user=current_user)
+
 @property.route('/list', methods=['GET', 'POST'])
 @login_required
 def properties():
@@ -48,9 +53,9 @@ def create():
     return render_template("/create.html", user=current_user, states=get_states(), portfolios=get_portfolios())
 
 
-@property.route('/<int:id>/edit_property', methods=['GET', 'POST'])
+@property.route('/<int:id>/edit', methods=['GET', 'POST'])
 @login_required
-def edit_property(id):
+def edit(id):
     #property = db.session.query(Property).filter_by(id=id, owner=current_user.id).first()
     property = Property.query.filter_by(id=id, owner=current_user.id).first()
     if request.method == "POST":
@@ -68,4 +73,4 @@ def edit_property(id):
         db.session.commit()
         return redirect(url_for('property.home', id=id))
 
-    return render_template("/edit_property.html", user=current_user, property=property, states=get_states())
+    return render_template("/edit.html", user=current_user, property=property, states=get_states())

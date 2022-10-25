@@ -46,7 +46,7 @@
             <tr class="align-middle">
                 <td class="text-nowrap">
                     <div>
-                        <a class="btn p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" href="/property/edit/{{ property.id }}"><span class="text-500 fas fa-edit"></span></a>
+                        <a class="btn p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" href="{{ url_for('property.edit', id=property.id) }}"><span class="text-500 fas fa-edit"></span></a>
                         <a class="btn p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Details" href="/property/{{ property.id }}"><span class="text-500 fas fa-caret-up"></span></a>
                     </div>
                 </td>

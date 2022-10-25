@@ -27,15 +27,11 @@ class Property(db.Model):
     name = db.Column(db.String(150))
     owner = db.Column(db.Integer, db.ForeignKey('user.id'))
     portfolio = db.Column(db.Integer, db.ForeignKey('portfolio.id'))
-    bedrooms = db.Column(db.Integer)
-    bathrooms = db.Column(db.Integer)
     address = db.Column(db.String(150))
     city = db.Column(db.String(150))
     state = db.Column(db.String(150))
     zip_code = db.Column(db.Integer)
     type = db.Column(db.String(150))
-    rent = db.Column(db.Integer)
-    units = db.Column(db.Integer)
 
 class Unit(db.Model):
     __tablename__ = 'unit'
@@ -61,4 +57,14 @@ class Tenant(db.Model):
     city = db.Column(db.String(150))
     state = db.Column(db.String(150))
     zip_code = db.Column(db.Integer)
-    property = db.Column(db.String(150))
+    property = db.Column(db.Integer, db.ForeignKey('property.id'))
+
+class Lease(db.Model):
+    __tablename__ = 'lease'
+    id = db.Column(db.Integer, primary_key=True)
+    tenant_id = db.Column(db.Integer, db.ForeignKey('tenant.id'))
+    unit_id = db.Column(db.Integer, db.ForeignKey('unit.id'))
+    property_id = db.Column(db.Integer, db.ForeignKey('property.id'))
+    start = db.Column(db.DateTime)
+    end = db.Column(db.DateTime)
+    rent = db.Column(db.Integer)

@@ -13,7 +13,7 @@ profile = Blueprint('profile', __name__, template_folder='templates')
 def dashboard():
     return render_template("dashboard.html", user=current_user)
 
-@profile.route('/profile')
+@profile.route('/')
 @login_required
 def home():
     return render_template("profile.html", user=current_user, properties=get_properties(), tenants=get_tenants()) 
